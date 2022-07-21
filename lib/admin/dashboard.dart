@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:library_admin/admin/layouts/desktop.dart';
 import 'package:library_admin/admin/layouts/mobile.dart';
 
 import 'inventory/pages/inventory.dart';
@@ -34,52 +35,23 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
+  void onNavigationTapped(int value) {
+    setState(() => _currentIndex = value);
+  }
+
   Widget get _mobileLayout {
     return MobileLayout(
       screens: _screens,
       navigationIndex: _currentIndex,
-      onNavigationTap: (value) {
-        setState(() => _currentIndex = value);
-      },
+      onNavigationTap: onNavigationTapped,
     );
   }
 
   Widget get _desktopLayout {
-    return Scaffold(
-      body: Row(
-        children: [
-          NavigationRail(
-            elevation: 8,
-            backgroundColor: Colors.blueGrey,
-            labelType: NavigationRailLabelType.selected,
-            selectedLabelTextStyle: const TextStyle(
-              color: Colors.white,
-            ),
-            selectedIconTheme: const IconThemeData(
-              color: Colors.white,
-            ),
-            destinations: const [
-              NavigationRailDestination(
-                icon: Icon(Icons.handyman),
-                label: Text('Inventory'),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.handshake),
-                label: Text('Loans'),
-              ),
-            ],
-            selectedIndex: _currentIndex,
-            onDestinationSelected: (value) =>
-                setState(() => _currentIndex = value),
-          ),
-          Expanded(
-            child: IndexedStack(
-              index: _currentIndex,
-              children: _screens,
-            ),
-          ),
-        ],
-      ),
+    return DesktopLayout(
+      screens: _screens,
+      navigationIndex: _currentIndex,
+      onNavigationTap: onNavigationTapped,
     );
   }
 }
