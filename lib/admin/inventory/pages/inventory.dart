@@ -5,7 +5,12 @@ import 'package:library_admin/admin/inventory/pages/new_thing.dart';
 import 'package:library_admin/admin/inventory/widgets/thing_list.dart';
 
 class InventoryPage extends StatefulWidget {
-  const InventoryPage({Key? key}) : super(key: key);
+  const InventoryPage({
+    Key? key,
+    this.onAddButtonTap,
+  }) : super(key: key);
+
+  final void Function()? onAddButtonTap;
 
   @override
   State<StatefulWidget> createState() {
@@ -28,10 +33,11 @@ class _InventoryPageState extends State<InventoryPage> {
         ],
       ),
       floatingActionButton: AddButton(
-        onPressed: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: ((context) => const NewThingPage())));
-        },
+        onPressed: widget.onAddButtonTap ??
+            () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: ((context) => const NewThingPage())));
+            },
         heroTag: 'AddThingButton',
       ),
     );

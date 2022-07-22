@@ -29,10 +29,7 @@ class _ThingEditorState extends State<ThingEditor> {
       appBar: AppBar(title: Text(widget.title)),
       body: ThingFields(thing: widget.thing),
       floatingActionButton: SaveButton(
-        onPressed: () {
-          widget.onSave();
-          Navigator.of(context).pop();
-        },
+        onPressed: widget.onSave,
         heroTag: 'ThingEditorSave',
       ),
     );

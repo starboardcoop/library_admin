@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:library_admin/admin/common/widgets/details_placeholder.dart';
 
-class DesktopLayout extends StatelessWidget {
+class DesktopLayout extends StatefulWidget {
   const DesktopLayout({
     Key? key,
     required this.screens,
     required this.navigationIndex,
     required this.onNavigationTap,
+    this.details,
   }) : super(key: key);
 
   final List<Widget> screens;
   final int navigationIndex;
   final void Function(int)? onNavigationTap;
+  final Widget? details;
 
+  @override
+  State<DesktopLayout> createState() => _DesktopLayoutState();
+}
+
+class _DesktopLayoutState extends State<DesktopLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,14 +45,18 @@ class DesktopLayout extends StatelessWidget {
                 label: Text('Loans'),
               ),
             ],
-            selectedIndex: navigationIndex,
-            onDestinationSelected: onNavigationTap,
+            selectedIndex: widget.navigationIndex,
+            onDestinationSelected: widget.onNavigationTap,
           ),
           Expanded(
             child: IndexedStack(
-              index: navigationIndex,
-              children: screens,
+              index: widget.navigationIndex,
+              children: widget.screens,
             ),
+          ),
+          Expanded(
+            flex: 2,
+            child: widget.details ?? const DetailsPlaceholder(),
           ),
         ],
       ),
