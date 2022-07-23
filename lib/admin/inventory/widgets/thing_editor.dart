@@ -10,8 +10,10 @@ class ThingEditor extends StatefulWidget {
     required this.title,
     required this.onSave,
     this.thing,
+    this.editable = true,
   }) : super(key: key);
 
+  final bool editable;
   final String title;
   final Thing? thing;
   final void Function() onSave;
@@ -23,15 +25,33 @@ class ThingEditor extends StatefulWidget {
 }
 
 class _ThingEditorState extends State<ThingEditor> {
+  bool _editing = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
-      body: ThingFields(thing: widget.thing),
-      floatingActionButton: SaveButton(
-        onPressed: widget.onSave,
-        heroTag: 'ThingEditorSave',
+      body: ThingFields(
+        thing: widget.thing,
+        editable: _editing,
       ),
+      floatingActionButton: _editing
+          ? SaveButton(
+              onPressed: widget.onSave,
+              heroTag: 'ThingEditorSave',
+            )
+          : _editButton,
+    );
+  }
+
+  Widget get _editButton {
+    return FloatingActionButton(
+      heroTag: 'ThingEditorEdit',
+      onPressed: () {
+        setState(() => _editing = true);
+      },
+      backgroundColor: Colors.blueGrey[600],
+      child: const Icon(Icons.edit),
     );
   }
 }

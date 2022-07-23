@@ -26,6 +26,7 @@ class _ThingDetailsPageState extends State<ThingDetailsPage> {
       title: name,
       thing: widget.thing,
       onSave: widget.onSave ?? () {},
+      editable: false,
     );
   }
 }
