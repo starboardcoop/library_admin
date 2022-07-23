@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:library_admin/admin/inventory/pages/new_thing.dart';
 import 'package:library_admin/admin/layouts/desktop.dart';
 import 'package:library_admin/admin/layouts/mobile.dart';
 
@@ -23,8 +22,6 @@ class _DashboardState extends State<Dashboard> {
     const LoansPage(),
   ];
 
-  Widget? _detailsPanel;
-
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -39,7 +36,6 @@ class _DashboardState extends State<Dashboard> {
   }
 
   void onNavigationTapped(int value) {
-    _detailsPanel = null;
     setState(() => _currentIndex = value);
   }
 
@@ -53,21 +49,12 @@ class _DashboardState extends State<Dashboard> {
 
   Widget get _desktopLayout {
     return DesktopLayout(
-      screens: [
-        InventoryPage(
-          onAddButtonTap: () {
-            setState(
-              () => _detailsPanel = NewThingPage(
-                onSave: () => setState(() => _detailsPanel = null),
-              ),
-            );
-          },
-        ),
-        const LoansPage(),
+      screens: const [
+        InventoryPage(),
+        LoansPage(),
       ],
       navigationIndex: _currentIndex,
       onNavigationTap: onNavigationTapped,
-      details: _detailsPanel,
     );
   }
 }

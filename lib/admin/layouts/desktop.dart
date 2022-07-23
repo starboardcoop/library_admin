@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:library_admin/admin/common/widgets/details_placeholder.dart';
 
 class DesktopLayout extends StatefulWidget {
   const DesktopLayout({
@@ -7,13 +6,11 @@ class DesktopLayout extends StatefulWidget {
     required this.screens,
     required this.navigationIndex,
     required this.onNavigationTap,
-    this.details,
   }) : super(key: key);
 
   final List<Widget> screens;
   final int navigationIndex;
   final void Function(int)? onNavigationTap;
-  final Widget? details;
 
   @override
   State<DesktopLayout> createState() => _DesktopLayoutState();
@@ -53,10 +50,6 @@ class _DesktopLayoutState extends State<DesktopLayout> {
               index: widget.navigationIndex,
               children: widget.screens,
             ),
-          ),
-          Expanded(
-            flex: 2,
-            child: widget.details ?? const DetailsPlaceholder(),
           ),
         ],
       ),
