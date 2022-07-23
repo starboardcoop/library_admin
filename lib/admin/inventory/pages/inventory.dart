@@ -3,6 +3,7 @@ import 'package:library_admin/admin/common/models/thing.dart';
 import 'package:library_admin/admin/common/widgets/add_button.dart';
 import 'package:library_admin/admin/common/widgets/details_placeholder.dart';
 import 'package:library_admin/admin/inventory/pages/new_thing.dart';
+import 'package:library_admin/admin/inventory/pages/thing_details.dart';
 import 'package:library_admin/admin/inventory/widgets/thing_list.dart';
 
 class InventoryPage extends StatefulWidget {
@@ -83,6 +84,30 @@ class _InventoryPageState extends State<InventoryPage> {
         Thing(name: 'Another Thing', stock: 3),
         Thing(name: 'A Thing We Want', stock: 0),
       ],
+      onThingTap: (thing) {
+        setState(
+          () {
+            _detailsPanel = ThingDetailsPage(
+              onSave: () {
+                if (!_isDesktop) {
+                  Navigator.of(context).pop();
+                }
+
+                setState(() => _detailsPanel = null);
+              },
+              thing: thing,
+            );
+
+            if (!_isDesktop) {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) {
+                  return _detailsPanel!;
+                },
+              ));
+            }
+          },
+        );
+      },
     );
   }
 }

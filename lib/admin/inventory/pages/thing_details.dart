@@ -3,9 +3,14 @@ import 'package:library_admin/admin/common/models/thing.dart';
 import 'package:library_admin/admin/inventory/widgets/thing_editor.dart';
 
 class ThingDetailsPage extends StatefulWidget {
-  const ThingDetailsPage({Key? key, required this.thing}) : super(key: key);
+  const ThingDetailsPage({
+    Key? key,
+    required this.thing,
+    this.onSave,
+  }) : super(key: key);
 
   final Thing thing;
+  final void Function()? onSave;
 
   @override
   State<StatefulWidget> createState() {
@@ -20,7 +25,7 @@ class _ThingDetailsPageState extends State<ThingDetailsPage> {
     return ThingEditor(
       title: name,
       thing: widget.thing,
-      onSave: () {},
+      onSave: widget.onSave ?? () {},
     );
   }
 }

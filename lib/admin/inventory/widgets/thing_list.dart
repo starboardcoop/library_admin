@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:library_admin/admin/common/models/thing.dart';
-import 'package:library_admin/admin/inventory/pages/thing_details.dart';
 
 class ThingList extends StatelessWidget {
-  const ThingList({Key? key, required this.things}) : super(key: key);
+  const ThingList({
+    Key? key,
+    required this.things,
+    this.onThingTap,
+  }) : super(key: key);
 
   final List<Thing> things;
+  final void Function(Thing)? onThingTap;
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +23,7 @@ class ThingList extends StatelessWidget {
             backgroundColor:
                 (things[index].stock ?? 0) == 0 ? Colors.pink[100] : null,
           ),
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: ((context) =>
-                    ThingDetailsPage(thing: things[index]))));
-          },
+          onTap: () => onThingTap?.call(things[index]),
         );
       },
     );
