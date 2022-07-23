@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:library_admin/admin/common/models/thing.dart';
+import 'package:library_admin/admin/common/widgets/edit_button.dart';
 import 'package:library_admin/admin/common/widgets/save_button.dart';
 
 import 'thing_fields.dart';
@@ -45,13 +46,11 @@ class _ThingEditorState extends State<ThingEditor> {
   }
 
   Widget get _editButton {
-    return FloatingActionButton(
+    return EditButton(
       heroTag: 'ThingEditorEdit',
       onPressed: () {
         setState(() => _editing = true);
       },
-      backgroundColor: Colors.blueGrey[600],
-      child: const Icon(Icons.edit),
     );
   }
 }
