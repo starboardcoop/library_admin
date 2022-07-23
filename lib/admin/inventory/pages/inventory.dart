@@ -55,17 +55,7 @@ class _InventoryPageState extends State<InventoryPage> {
       body: _thingList,
       floatingActionButton: AddButton(
         onPressed: () {
-          setState(
-            () => _detailsPanel = NewThingPage(
-              onSave: () {
-                if (!_isDesktop) {
-                  Navigator.of(context).pop();
-                }
-
-                setState(() => _detailsPanel = null);
-              },
-            ),
-          );
+          setState(() => _detailsPanel = _newThingPage(context));
 
           if (!_isDesktop) {
             Navigator.of(context)
@@ -74,6 +64,18 @@ class _InventoryPageState extends State<InventoryPage> {
         },
         heroTag: 'AddThingButton',
       ),
+    );
+  }
+
+  NewThingPage _newThingPage(BuildContext context) {
+    return NewThingPage(
+      onSave: () {
+        if (!_isDesktop) {
+          Navigator.of(context).pop();
+        }
+
+        setState(() => _detailsPanel = null);
+      },
     );
   }
 
@@ -87,27 +89,33 @@ class _InventoryPageState extends State<InventoryPage> {
       onThingTap: (thing) {
         setState(
           () {
-            _detailsPanel = ThingDetailsPage(
-              onSave: () {
-                if (!_isDesktop) {
-                  Navigator.of(context).pop();
-                }
-
-                setState(() => _detailsPanel = null);
-              },
-              thing: thing,
-            );
+            _detailsPanel = _thingDetailsPage(thing);
 
             if (!_isDesktop) {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) {
-                  return _detailsPanel!;
-                },
-              ));
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return _detailsPanel!;
+                  },
+                ),
+              );
             }
           },
         );
       },
+    );
+  }
+
+  ThingDetailsPage _thingDetailsPage(Thing thing) {
+    return ThingDetailsPage(
+      onSave: () {
+        if (!_isDesktop) {
+          Navigator.of(context).pop();
+        }
+
+        setState(() => _detailsPanel = null);
+      },
+      thing: thing,
     );
   }
 }
