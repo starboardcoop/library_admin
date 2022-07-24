@@ -3,10 +3,15 @@ import 'package:library_admin/admin/common/models/thing.dart';
 import 'package:library_admin/admin/common/widgets/decorated_text_field.dart';
 
 class ThingFields extends StatelessWidget {
-  ThingFields({Key? key, this.thing}) : super(key: key) {
+  ThingFields({
+    Key? key,
+    this.thing,
+    this.editable = true,
+  }) : super(key: key) {
     _nameController = TextEditingController(text: thing?.name);
   }
 
+  final bool editable;
   final Thing? thing;
   late final TextEditingController _nameController;
 
@@ -18,13 +23,23 @@ class ThingFields extends StatelessWidget {
         DecoratedTextField(
           labelText: 'Name',
           controller: _nameController,
+          enabled: editable,
         ),
         const SizedBox(height: 8),
-        const DecoratedTextField(labelText: 'Categories'),
+        DecoratedTextField(
+          labelText: 'Categories',
+          enabled: editable,
+        ),
         const SizedBox(height: 8),
-        const DecoratedTextField(labelText: 'Description'),
+        DecoratedTextField(
+          labelText: 'Description',
+          enabled: editable,
+        ),
         const SizedBox(height: 8),
-        const DecoratedTextField(labelText: 'Bulk Add'),
+        DecoratedTextField(
+          labelText: 'Bulk Add',
+          enabled: editable,
+        ),
       ],
     );
   }

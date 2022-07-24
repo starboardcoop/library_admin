@@ -12,6 +12,7 @@ class LibraryApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Library App',
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,

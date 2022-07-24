@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class DesktopLayout extends StatelessWidget {
+class DesktopLayout extends StatefulWidget {
   const DesktopLayout({
     Key? key,
     required this.screens,
@@ -12,6 +12,11 @@ class DesktopLayout extends StatelessWidget {
   final int navigationIndex;
   final void Function(int)? onNavigationTap;
 
+  @override
+  State<DesktopLayout> createState() => _DesktopLayoutState();
+}
+
+class _DesktopLayoutState extends State<DesktopLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,13 +42,13 @@ class DesktopLayout extends StatelessWidget {
                 label: Text('Loans'),
               ),
             ],
-            selectedIndex: navigationIndex,
-            onDestinationSelected: onNavigationTap,
+            selectedIndex: widget.navigationIndex,
+            onDestinationSelected: widget.onNavigationTap,
           ),
           Expanded(
             child: IndexedStack(
-              index: navigationIndex,
-              children: screens,
+              index: widget.navigationIndex,
+              children: widget.screens,
             ),
           ),
         ],

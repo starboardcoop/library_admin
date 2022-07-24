@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:library_admin/admin/inventory/widgets/thing_editor.dart';
 
 class NewThingPage extends StatefulWidget {
-  const NewThingPage({Key? key}) : super(key: key);
+  const NewThingPage({
+    Key? key,
+    this.onSave,
+  }) : super(key: key);
+
+  final void Function()? onSave;
 
   @override
   State<StatefulWidget> createState() {
@@ -15,7 +20,7 @@ class _NewThingPageState extends State<NewThingPage> {
   Widget build(BuildContext context) {
     return ThingEditor(
       title: 'New Thing',
-      onSave: () {},
+      onSave: widget.onSave ?? () {},
     );
   }
 }

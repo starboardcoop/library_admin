@@ -49,7 +49,10 @@ class _DashboardState extends State<Dashboard> {
 
   Widget get _desktopLayout {
     return DesktopLayout(
-      screens: _screens,
+      screens: const [
+        InventoryPage(),
+        LoansPage(),
+      ],
       navigationIndex: _currentIndex,
       onNavigationTap: onNavigationTapped,
     );

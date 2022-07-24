@@ -5,8 +5,10 @@ class DecoratedTextField extends StatelessWidget {
     super.key,
     required this.labelText,
     this.controller,
+    this.enabled = true,
   });
 
+  final bool enabled;
   final String labelText;
   final TextEditingController? controller;
 
@@ -19,6 +21,7 @@ class DecoratedTextField extends StatelessWidget {
       ),
       textCapitalization: TextCapitalization.words,
       controller: controller,
+      enabled: enabled,
     );
   }
 }
