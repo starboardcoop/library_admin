@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:library_admin/admin/common/api/inventory.dart';
 import 'package:library_admin/admin/common/models/thing.dart';
 import 'package:library_admin/admin/common/widgets/add_button.dart';
 import 'package:library_admin/admin/common/widgets/details_placeholder.dart';
@@ -25,6 +26,9 @@ class _InventoryPageState extends State<InventoryPage> {
 
   Widget? _detailsPanel;
   bool _isDesktop = false;
+
+  final _api = InventoryAPI();
+  List<Thing> _things = [];
 
   @override
   Widget build(BuildContext context) {
@@ -80,12 +84,10 @@ class _InventoryPageState extends State<InventoryPage> {
   }
 
   ThingList get _thingList {
+    _api.getAll().then((value) => setState(() => _things = value));
+
     return ThingList(
-      things: [
-        Thing(name: 'Thing', stock: 1),
-        Thing(name: 'Another Thing', stock: 3),
-        Thing(name: 'A Thing We Want', stock: 0),
-      ],
+      things: _things,
       onThingTap: (thing) {
         setState(
           () {
