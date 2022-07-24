@@ -1,16 +1,24 @@
-# library_admin
+# Library Admin
 
-A new Flutter project.
+## Background
+
+Library Admin is a Flutter app designed for operating a tool-lending library. Development is currently focused on the needs of [PVD Things](https://www.pvdthings.coop), a new tool-lending library in Providence, Rhode Island.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+First, make sure you have [Flutter 3](https://docs.flutter.dev/get-started/install) installed.
 
-A few resources to get you started if this is your first Flutter project:
+Then clone the repo.
+```
+git clone https://github.com/starboardcoop/library_admin.git
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+From the project directory in your terminal app, install all dependencies.
+```
+flutter pub get
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Run the project.
+```
+flutter run
+```
