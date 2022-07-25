@@ -18,7 +18,7 @@ From the project directory in your terminal app, install all dependencies.
 flutter pub get
 ```
 
-Run the project.
+Run the project. You'll need to get the appropriate key, ID, and table name for the database hosted by Airtable.
 ```
-flutter run
+flutter run --dart-define=AIRTABLE_API_KEY=<KEY> --dart-define=AIRTABLE_BASE=<ID> --dart-define=AIRTABLE_INVENTORY_TABLE=<Name>
 ```
