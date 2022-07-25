@@ -31,6 +31,12 @@ class _InventoryPageState extends State<InventoryPage> {
   List<Thing> _things = [];
 
   @override
+  void initState() {
+    _api.getAll().then((value) => setState(() => _things = value));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       if (constraints.maxWidth < 701) {
@@ -84,8 +90,6 @@ class _InventoryPageState extends State<InventoryPage> {
   }
 
   ThingList get _thingList {
-    _api.getAll().then((value) => setState(() => _things = value));
-
     return ThingList(
       things: _things,
       onThingTap: (thing) {

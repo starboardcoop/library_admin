@@ -1,15 +1,21 @@
+import 'package:dart_airtable/dart_airtable.dart';
+
 import '../models/thing.dart';
 
 class InventoryAPI {
   Future<List<Thing>> getAll() async {
-    return [
-      Thing(name: 'Hammer', stock: 5),
-      Thing(name: 'Drill, Corded', stock: 2),
-      Thing(name: 'Drill, Cordless', stock: 3),
-      Thing(name: '5 ft Ladder', stock: 1),
-      Thing(name: 'Garden Shears', stock: 4),
-      Thing(name: 'Prokadima Set', stock: 1),
-      Thing(name: 'Bocce Set', stock: 0),
-    ];
+    const apiKey = String.fromEnvironment('AIRTABLE_API_KEY');
+    const base = String.fromEnvironment('AIRTABLE_BASE');
+    const table = String.fromEnvironment('AIRTABLE_INVENTORY_TABLE');
+
+    final airtable = Airtable(apiKey: apiKey, projectBase: base);
+    final records = await airtable.getAllRecords(table);
+
+    return records.map((r) {
+      return Thing(
+        name: r.getField('Name')?.value as String?,
+        stock: r.getField('Stock')?.value as int?,
+      );
+    }).toList();
   }
 }
