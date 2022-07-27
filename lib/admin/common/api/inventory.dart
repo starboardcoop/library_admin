@@ -15,6 +15,13 @@ class InventoryAPI {
       return Thing(
         name: r.getField('Name')?.value as String?,
         stock: r.getField('Stock')?.value as int?,
+        isHidden: r.getField('Hidden')?.value as bool?,
+        categories: (r.getField('Category')?.value as List).cast<String>(),
+        imageUrls: (r.getField('Image')?.value as List?)?.map(
+          (image) {
+            return image['thumbnails']['large']['url'] as String;
+          },
+        ).toList(),
       );
     }).toList();
   }
