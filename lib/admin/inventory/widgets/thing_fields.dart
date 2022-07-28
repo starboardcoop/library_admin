@@ -9,14 +9,11 @@ class ThingFields extends StatelessWidget {
     this.editable = true,
   }) : super(key: key) {
     _nameController = TextEditingController(text: thing?.name);
-    _categoriesController =
-        TextEditingController(text: thing?.categories?.join(', '));
   }
 
   final bool editable;
   final Thing? thing;
   late final TextEditingController _nameController;
-  late final TextEditingController _categoriesController;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +25,9 @@ class ThingFields extends StatelessWidget {
           semanticLabel: thing?.name,
           errorBuilder: (context, error, stackTrace) {
             return Container(
-              child: SizedBox.square(dimension: 240, child: Text('No Image')),
               color: Colors.blueGrey[100],
+              child: const SizedBox.square(
+                  dimension: 240, child: Text('No Image')),
             );
           },
           width: 240,
@@ -41,10 +39,17 @@ class ThingFields extends StatelessWidget {
           enabled: editable,
         ),
         const SizedBox(height: 8),
-        DecoratedTextField(
-          labelText: 'Categories',
-          controller: _categoriesController,
-          enabled: editable,
+        Wrap(
+          alignment: WrapAlignment.start,
+          spacing: 8,
+          children: thing!.categories
+                  ?.map((c) => Chip(
+                        label: Text(c),
+                        deleteIcon: const Icon(Icons.remove),
+                        onDeleted: () {},
+                      ))
+                  .toList() ??
+              [],
         ),
         const SizedBox(height: 8),
         DecoratedTextField(
